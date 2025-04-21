@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class User {
     private final String name;
     private String address;
@@ -27,6 +30,13 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public static boolean isValidNumber(String number) {
+        String regex = "^\\+?[0-9]{10,15}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
     }
 
     @Override
