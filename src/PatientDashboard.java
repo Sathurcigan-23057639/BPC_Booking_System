@@ -81,5 +81,12 @@ public class PatientDashboard {
                 patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
             }
         }
+
+        if (patient != null) {
+            //AppointmentHandling.manageAppointments(patient);
+        } else {
+            System.out.println("Patient profile not found..!");
+            findPatientProfile();
+        }
     }
 }

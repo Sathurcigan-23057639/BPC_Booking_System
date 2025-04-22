@@ -1,5 +1,5 @@
 public class Patient extends User {
-    private int id;
+    private final int id;
 
     public Patient(int id, String name, String address, String phone) {
         super(name, address, phone);

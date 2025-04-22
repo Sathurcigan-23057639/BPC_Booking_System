@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class BookingHandlingSystem {
     private static final Scanner scanner = new Scanner(System.in);
@@ -21,7 +23,6 @@ public class BookingHandlingSystem {
     }
 
     public static void main(String[] args) {
-        //sampleData.initializeData();
         MainPage();
     }
 

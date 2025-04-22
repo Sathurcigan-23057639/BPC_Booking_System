@@ -1,10 +1,13 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Physiotherapist extends User {
     private final int id;
     private final String expertise;
     private final List<String> treatments;
-    private final Map<String, String> availability;
+    private final Map<String, String> availability; // Day & Time
 
     public Physiotherapist(int id, String name, String address, String phone, String expertise) {
         super(name, address, phone);

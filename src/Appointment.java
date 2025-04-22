@@ -33,6 +33,10 @@ public class Appointment {
         return treatment;
     }
 
+    public String getExpertise() {
+        return expertise;
+    }
+
     public String getTime() {
         return time;
     }
@@ -45,7 +49,7 @@ public class Appointment {
         return status;
     }
 
-    public void updateStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -53,7 +57,7 @@ public class Appointment {
     public String toString() {
         return "Appointment ID: " + id + ", Patient: " + patient.getName() +
                 ", Physiotherapist: " + physiotherapist.getName() +
-                ", Expertise: " + expertise + ", Treatment: " + treatment + ", Time: " + time +
+                ", Expertise: " + getExpertise() + ", Treatment: " + treatment + ", Time: " + time +
                 ", Status: " + status;
     }
 }
