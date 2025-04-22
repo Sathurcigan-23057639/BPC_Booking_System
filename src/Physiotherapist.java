@@ -7,7 +7,7 @@ public class Physiotherapist extends User {
     private final int id;
     private final String expertise;
     private final List<String> treatments;
-    private final Map<String, String> availability; // Day & Time
+    private final Map<String, String> availability;
 
     public Physiotherapist(int id, String name, String address, String phone, String expertise) {
         super(name, address, phone);

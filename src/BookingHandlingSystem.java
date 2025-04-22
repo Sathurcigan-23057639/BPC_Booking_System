@@ -23,6 +23,7 @@ public class BookingHandlingSystem {
     }
 
     public static void main(String[] args) {
+        sampleData.initializeData();
         MainPage();
     }
 
@@ -47,7 +48,7 @@ public class BookingHandlingSystem {
 
         switch (choice) {
             case 1 -> PatientDashboard.patientMenu();
-//            case 2 -> PhysiotherapistDashboard.physiotherapistMenu();
+            case 2 -> PhysiotherapistDashboard.physiotherapistMenu();
             case 3 -> close();
             default -> {
                 System.out.println("Invalid choice. Try again.");

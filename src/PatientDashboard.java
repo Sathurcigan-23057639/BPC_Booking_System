@@ -22,8 +22,8 @@ public class PatientDashboard {
         }
 
         switch (choice) {
-            case 1 -> createPatientProfile();
-            case 2 -> findPatientProfile();
+            case 1 -> createPatient();
+            case 2 -> findPatient();
             case 3 -> BookingHandlingSystem.backToMainPage();
             default -> {
                 System.out.println("Invalid choice. Try again.");
@@ -32,7 +32,7 @@ public class PatientDashboard {
         }
     }
 
-    private static void createPatientProfile() {
+    private static void createPatient() {
         System.out.print("\nEnter your Full Name: ");
         scanner.nextLine();
         String name = scanner.nextLine();
@@ -48,12 +48,12 @@ public class PatientDashboard {
             System.out.println("\nPatient Profile has been created successfully...! \nYour ID is: " + id);
             patientMenu();
         } else {
-            System.out.print("Please enter a valid phone number and try again!");
+            System.out.print("Please enter a valid phone number and Try again..!");
             patientMenu();
         }
     }
 
-    protected static void findPatientProfile() {
+    protected static void findPatient() {
         int choice = 0;
         System.out.println("\n1. Search by Patient ID");
         System.out.println("2. Search by Name");
@@ -62,16 +62,25 @@ public class PatientDashboard {
         if (scanner.hasNextInt()) {
             choice = scanner.nextInt();
         } else {
-            System.out.println("Invalid input! Please enter a valid choice.");
+            System.out.println("Invalid input! Please enter a valid choice..!");
             scanner.next();
-            findPatientProfile();
+            findPatient();
         }
 
         Patient patient = null;
         switch (choice) {
             case 1 -> {
                 System.out.print("\nEnter Patient ID: ");
-                int id = scanner.nextInt();
+                int id;
+
+                if (scanner.hasNextInt()) {
+                    id = scanner.nextInt();
+                } else {
+                    id = 0;
+                    System.out.println("Invalid input..! Please enter a valid Patient ID..!");
+                    scanner.next();
+                    findPatient();
+                }
                 patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getId() == id).findFirst().orElse(null);
             }
             case 2 -> {
@@ -80,13 +89,17 @@ public class PatientDashboard {
                 String name = scanner.nextLine();
                 patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
             }
+            default -> {
+                System.out.println("Invalid choice. Try again..!");
+                findPatient();
+            }
         }
 
         if (patient != null) {
-            //AppointmentHandling.manageAppointments(patient);
+            AppointmentHandling.manageAppointments(patient);
         } else {
             System.out.println("Patient profile not found..!");
-            findPatientProfile();
+            findPatient();
         }
     }
 }

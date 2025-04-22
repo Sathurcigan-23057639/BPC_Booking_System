@@ -7,7 +7,7 @@ public class AppointmentHandling {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void manageAppointments(Patient patient) {
-        System.out.println("\nPatient Profile: " + patient);
+        System.out.println("\n=> " + patient);
         handleAppointment(patient);
     }
 
@@ -46,7 +46,7 @@ public class AppointmentHandling {
             handleAppointment(patient);
         } else {
             System.out.println("\n Your Appointments:");
-            patientAppointments.forEach(a -> System.out.println("=> " + a));
+            patientAppointments.forEach(a -> System.out.println(" => " + a));
 
             System.out.println("\n 1. Process Appointment");
             System.out.println(" 2. Back");
@@ -88,9 +88,9 @@ public class AppointmentHandling {
                 if (scanner.hasNextInt()) {
                     choice = scanner.nextInt();
                 } else {
-                    System.out.println("Invalid input! Please enter a valid choice..!");
+                    System.out.println(" Invalid input! Please enter a valid choice..!");
                     scanner.next();
-                    handleAppointment(patient);
+                    processAppointment(patient);
                 }
 
                 switch (choice) {
@@ -98,7 +98,7 @@ public class AppointmentHandling {
                     case 2 -> rescheduleAppointment(patient);
                     case 3 -> cancelAppointment(appointmentID, patient);
                     default -> {
-                        System.out.println("Invalid option. Try Again..!");
+                        System.out.println(" Invalid option. Try Again..!");
                         viewAppointments(patient);
                     }
                 }
@@ -108,7 +108,7 @@ public class AppointmentHandling {
             }
 
         } else {
-            System.out.println("Invalid input! Please enter a Appointment ID..!");
+            System.out.println(" Invalid input! Please enter a Appointment ID..!");
             scanner.next();
             viewAppointments(patient);
         }
@@ -128,9 +128,10 @@ public class AppointmentHandling {
                 System.out.println("\n Appointment Attended successfully.");
             } else {
                 System.out.println(" Invalid Appointment ID..!\n Check the status of the Appointment you are currently prioritising, that might be already completed..!");
+                processAppointment(patient);
             }
         }
-        handleAppointment(patient);
+        viewAppointments(patient);
     }
 
     private static void cancelAppointment(int id, Patient patient) {
@@ -164,7 +165,7 @@ public class AppointmentHandling {
         System.out.println("\nYour Appointments:");
         patientAppointments.forEach(a -> System.out.println("=> " + a));
 
-        System.out.print("Enter Appointment ID to reschedule: ");
+        System.out.print("\nEnter Appointment ID to reschedule: ");
         int appointmentId;
 
         if (scanner.hasNextInt()) {
@@ -186,14 +187,14 @@ public class AppointmentHandling {
             if (physiotherapist != null) {
                 boolean rescheduling = true;
                 while (rescheduling) {
-                    System.out.println("\nAvailable Time Slots for " + physiotherapist.getName() + ":");
+                    System.out.println("\nAvailable Time Slots for Dr." + physiotherapist.getName() + ":");
                     Map<String, String> availableTimes = physiotherapist.getAvailability();
 
                     int slotCounter = 1;
                     Map<Integer, String> timeSlotMap = new HashMap<>();
 
                     for (Map.Entry<String, String> entry : availableTimes.entrySet()) {
-                        System.out.println("Timeslot ID: " + slotCounter + "=> Day: " + entry.getKey() + ", Time: " + entry.getValue());
+                        System.out.println("Timeslot ID: " + slotCounter + " => Day: " + entry.getKey() + ", Time: " + entry.getValue());
                         timeSlotMap.put(slotCounter, entry.getKey() + "-" + entry.getValue());
                         slotCounter++;
                     }
@@ -254,7 +255,7 @@ public class AppointmentHandling {
         if (scanner.hasNextInt()) {
             choice = scanner.nextInt();
         } else {
-            System.out.println("Invalid input! Please enter a valid choice..!");
+            System.out.println(" Invalid input! Please enter a valid choice..!");
             scanner.next();
             bookAppointment(patient);
         }
@@ -264,7 +265,7 @@ public class AppointmentHandling {
             case 2 -> searchAndBookByExpertise(patient);
             case 3 -> handleAppointment(patient);
             default -> {
-                System.out.println("Invalid option. Please Try Again..!");
+                System.out.println(" Invalid option. Please Try Again..!");
                 bookAppointment(patient);
             }
         }
@@ -348,10 +349,10 @@ public class AppointmentHandling {
         } else {
             System.out.println("Invalid input! Please enter a valid option..!");
             scanner.next();
-            searchAndBookByTreatment(patient);
+            bookAppointment(patient);
         }
 
-        PatientDashboard.patientMenu();
+        handleAppointment(patient);
     }
 
     private static void searchAndBookByExpertise(Patient patient) {
@@ -432,7 +433,7 @@ public class AppointmentHandling {
         } else {
             System.out.println("Invalid input! Please enter a valid option..!");
             scanner.next();
-            searchAndBookByTreatment(patient);
+            PatientDashboard.patientMenu();
         }
 
         PatientDashboard.patientMenu();
