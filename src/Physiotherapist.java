@@ -49,7 +49,7 @@ public class Physiotherapist extends User {
 
     public void addAvailability(String day, String timeSlot) {
         LocalDate currentDate = LocalDate.now();
-        DayOfWeek targetDay = getDayOfWeekFromString(day);
+        DayOfWeek targetDay = Physiotherapist.getDayOfWeekFromString(day);
         if (targetDay == null) {
             System.out.println("Invalid day input..!");
             return;
@@ -65,7 +65,7 @@ public class Physiotherapist extends User {
         }
     }
 
-    private DayOfWeek getDayOfWeekFromString(String dayOfWeek) {
+    public static DayOfWeek getDayOfWeekFromString(String dayOfWeek) {
         return switch (dayOfWeek.toLowerCase()) {
             case "monday" -> DayOfWeek.MONDAY;
             case "tuesday" -> DayOfWeek.TUESDAY;

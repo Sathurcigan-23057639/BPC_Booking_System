@@ -22,15 +22,15 @@ public class sampleData {
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p3);
 
         Physiotherapist p4 = new Physiotherapist(4, "varun", "UK", "98765678767", "Physiotherapy");
-        p3.addTreatment("Musculoskeletal Physiotherapy");
-        p3.addAvailability("Monday", "12:00-14:00");
-        p3.addAvailability("Wednesday", "09:00-11:00");
+        p4.addTreatment("Musculoskeletal Physiotherapy");
+        p4.addAvailability("Monday", "12:00-14:00");
+        p4.addAvailability("Wednesday", "09:00-11:00");
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p4);
 
         Physiotherapist p5 = new Physiotherapist(5, "Johnny", "UK", "87676789098", "Osteopathy");
-        p3.addTreatment("Visceral Osteopathy");
-        p3.addAvailability("Monday", "15:00-16:00");
-        p3.addAvailability("Friday", "13:00-15:00");
+        p5.addTreatment("Visceral Osteopathy");
+        p5.addAvailability("Monday", "15:00-16:00");
+        p5.addAvailability("Friday", "13:00-15:00");
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p5);
 
         // Adding sample Patients
