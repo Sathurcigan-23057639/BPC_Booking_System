@@ -1,3 +1,5 @@
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,14 @@ public class Physiotherapist extends User {
         this.availability = new HashMap<>();
     }
 
+    public static LocalDate getNextWeekday(LocalDate startDate, DayOfWeek targetDay) {
+        LocalDate nextDate = startDate;
+        while (nextDate.getDayOfWeek() != targetDay) {
+            nextDate = nextDate.plusDays(1);
+        }
+        return nextDate;
+    }
+
     public int getId() {
         return id;
     }
@@ -33,12 +43,39 @@ public class Physiotherapist extends User {
         treatments.add(treatment.substring(0, 1).toUpperCase() + treatment.substring(1));
     }
 
-    public void addAvailability(String day, String time) {
-        availability.put(day, time);
-    }
-
     public Map<String, String> getAvailability() {
         return availability;
+    }
+
+    public void addAvailability(String day, String timeSlot) {
+        LocalDate currentDate = LocalDate.now();
+        DayOfWeek targetDay = getDayOfWeekFromString(day);
+        if (targetDay == null) {
+            System.out.println("Invalid day input..!");
+            return;
+        }
+
+        // Get the date for the next occurrence of the target day
+        LocalDate nextDay = getNextWeekday(currentDate, targetDay);
+
+        // Loop over the next 4 weeks to add the availability
+        for (int i = 0; i < 4; i++) {
+            LocalDate weekDate = nextDay.plusWeeks(i);
+            availability.put(String.valueOf(weekDate), timeSlot);
+        }
+    }
+
+    private DayOfWeek getDayOfWeekFromString(String dayOfWeek) {
+        return switch (dayOfWeek.toLowerCase()) {
+            case "monday" -> DayOfWeek.MONDAY;
+            case "tuesday" -> DayOfWeek.TUESDAY;
+            case "wednesday" -> DayOfWeek.WEDNESDAY;
+            case "thursday" -> DayOfWeek.THURSDAY;
+            case "friday" -> DayOfWeek.FRIDAY;
+            case "saturday" -> DayOfWeek.SATURDAY;
+            case "sunday" -> DayOfWeek.SUNDAY;
+            default -> null;
+        };
     }
 
     @Override
