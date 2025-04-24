@@ -136,20 +136,19 @@ public class PhysiotherapistDashboard {
 
         if (scanner.hasNextInt()) {
             id = scanner.nextInt();
+
+            Physiotherapist physio = BookingHandlingSystem.getInstance().getPhysiotherapists().stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+
+            if (physio != null) {
+                updatePhysioProfile(physio);
+            } else {
+                System.out.println("Physiotherapist not found.");
+                findPhysiotherapist();
+            }
         } else {
-            id = 0;
             System.out.println("Invalid input! Please enter a valid Physiotherapist ID..!");
             scanner.next();
             searchPhysiotherapistById();
-        }
-
-        Physiotherapist physio = BookingHandlingSystem.getInstance().getPhysiotherapists().stream().filter(p -> p.getId() == id).findFirst().orElse(null);
-
-        if (physio != null) {
-            updatePhysioProfile(physio);
-        } else {
-            System.out.println("Physiotherapist not found.");
-            findPhysiotherapist();
         }
     }
 
@@ -177,21 +176,21 @@ public class PhysiotherapistDashboard {
     }
 
     private static void generateReport() {
-        System.out.println("---------------------------------------------------");
+        System.out.println("\n---------------------------------------------------");
         System.out.println("            Appointment Detailed Report");
         System.out.println("---------------------------------------------------");
 
         BookingHandlingSystem.getInstance().getPhysiotherapists().forEach(physio -> {
-            System.out.println("Physiotherapist: " + physio.getName());
+            System.out.println("Physiotherapist: Dr." + physio.getName());
             List<Appointment> physioAppointments = BookingHandlingSystem.getInstance().getAppointments().stream().filter(a -> a.getPhysiotherapist().equals(physio)).toList();
 
             long attendedCount = physioAppointments.stream().filter(a -> "Attended".equalsIgnoreCase(a.getStatus())).count();
             long cancelledCount = physioAppointments.stream().filter(a -> "Cancelled".equalsIgnoreCase(a.getStatus())).count();
             long bookedCount = physioAppointments.size();
 
+            physioAppointments.forEach(a->System.out.println("=> "+a));
             System.out.println("Number of Attended Appointments: " + attendedCount + "\nNumber of Cancelled Appointments: " + cancelledCount);
             System.out.println("Total Appointments: " + bookedCount + "\n");
-            physioAppointments.forEach(System.out::println);
         });
         physiotherapistMenu();
     }

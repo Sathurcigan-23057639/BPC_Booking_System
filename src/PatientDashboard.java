@@ -87,7 +87,7 @@ public class PatientDashboard {
                 System.out.print("\nEnter Name: ");
                 scanner.nextLine();
                 String name = scanner.nextLine();
-                patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+                    patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
             }
             default -> {
                 System.out.println("Invalid choice. Try again..!");
