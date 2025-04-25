@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PhysiotherapistDashboard {
@@ -153,8 +155,14 @@ public class PhysiotherapistDashboard {
     }
 
     private static void updatePhysioProfile(Physiotherapist physio) {
-        System.out.println("=> " + physio);
-
+        ArrayList<String> names = new ArrayList<>();
+        for (Map.Entry<String, String> slot : physio.getAvailability().entrySet()) {
+            String day = AppointmentHandling.convertDate(slot.getKey());
+            String time = slot.getValue();
+            String fullTime = day + " " + time;
+            names.add(fullTime);
+        }
+        System.out.println("=> Physiotherapist ID: "+physio.getId()+", Name: "+physio.getName()+", Address: "+physio.getAddress()+", Phone: "+physio.getPhone()+", Expertise: "+physio.getExpertise()+", Treatments: "+physio.getTreatments()+", Availability: "+names);
         System.out.print("Do you want to modify available time slots? (yes/no): ");
         scanner.nextLine();
         String choice = scanner.nextLine();
@@ -171,8 +179,11 @@ public class PhysiotherapistDashboard {
                 physio.addAvailability(day.substring(0, 1).toUpperCase() + day.substring(1), time);
             }
             System.out.println("Availability updated successfully!");
-            physiotherapistMenu();
         }
+        else{
+            System.out.println("Try again..!");
+        }
+        physiotherapistMenu();
     }
 
     private static void generateReport() {
