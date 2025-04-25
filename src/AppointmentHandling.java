@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class AppointmentHandling {
@@ -135,7 +134,7 @@ public class AppointmentHandling {
     }
 
     private static void cancelAppointment(int id, Patient patient) {
-        List<Appointment> patientAppointments = BookingHandlingSystem.getInstance().getAppointments().stream().filter(a -> a.getPatient().equals(patient) && a.getStatus().equals("Booked")).toList();
+        List<Appointment> patientAppointments =   BookingHandlingSystem.getInstance().getAppointments().stream().filter(a -> a.getPatient().equals(patient) && a.getStatus().equals("Booked")).toList();
         Appointment appointment = patientAppointments.stream().filter(a -> a.getId() == id).findFirst().orElse(null);
 
         System.out.print(" Do you want to cancel the Appointment (yes/no): ");
@@ -144,51 +143,13 @@ public class AppointmentHandling {
 
         if (answer.toLowerCase().trim().equalsIgnoreCase("yes")) {
             if (appointment != null) {
-                String NonProperDate = appointment.getTime();
-                String[] NonDate = NonProperDate.split(" ");
-                String nonProcessedDate = NonDate[3] + "-" + calculateMonth(NonDate[2]) + "-" + NonDate[1];
-
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate today = LocalDate.parse(LocalDate.now().toString(), df);
-                LocalDate date = LocalDate.parse(nonProcessedDate, df);
-
-                long diffDate = ChronoUnit.DAYS.between(today, date);
-                System.out.println("\n Appointment Date: " + date + ", today: " + today + ", difference: " + diffDate);
-
-                if (diffDate > 0) {
-
-                    String day = NonDate[0];
-                    String time = NonDate[4];
-                    Physiotherapist physio = appointment.getPhysiotherapist();
-
-                    appointment.setStatus("Cancelled");
-                    physio.addAvailability(day, time);
-                    System.out.println("\n Appointment Cancelled successfully..!");
-                }
-
+                appointment.setStatus("Cancelled");
+                System.out.println("\n Appointment Cancelled successfully..!");
             } else {
                 System.out.println(" Invalid Appointment ID..! \n Check the status of the Appointment you are currently prioritising, that might be already completed..!");
             }
         }
         handleAppointment(patient);
-    }
-
-    private static String calculateMonth(String month) {
-        return switch (month) {
-            case "January" -> "01";
-            case "February" -> "02";
-            case "March" -> "03";
-            case "April" -> "04";
-            case "May" -> "05";
-            case "June" -> "06";
-            case "July" -> "07";
-            case "August" -> "08";
-            case "September" -> "09";
-            case "October" -> "10";
-            case "November" -> "11";
-            case "December" -> "12";
-            default -> null;
-        };
     }
 
     private static void rescheduleAppointment(Patient patient) {
@@ -232,8 +193,12 @@ public class AppointmentHandling {
                     Map<Integer, String> timeSlotMap = new HashMap<>();
 
                     for (Map.Entry<String, String> entry : availableTimes.entrySet()) {
-                        System.out.println("Timeslot ID: " + slotCounter + " => Day: " + entry.getKey() + ", Time: " + entry.getValue());
-                        timeSlotMap.put(slotCounter, entry.getKey() + "-" + entry.getValue());
+                        String day = convertDate(entry.getKey());
+                        String time = entry.getValue();
+                        String fullTime = day + " " + time;
+
+                        System.out.println("Timeslot ID: " + slotCounter + " => " + fullTime);
+                        timeSlotMap.put(slotCounter, fullTime);
                         slotCounter++;
                     }
 

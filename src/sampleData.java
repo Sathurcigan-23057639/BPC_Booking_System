@@ -22,7 +22,7 @@ public class sampleData {
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p3);
 
         Physiotherapist p4 = new Physiotherapist(4, "varun", "UK", "98765678767", "Physiotherapy");
-        p4.addTreatment("Musculoskeletal Physiotherapy");
+        p4.addTreatment("Massage");
         p4.addAvailability("Monday", "12:00-14:00");
         p4.addAvailability("Wednesday", "09:00-11:00");
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p4);
