@@ -79,7 +79,7 @@ public class PatientDashboard {
                     id = 0;
                     System.out.println("Invalid input..! Please enter a valid Patient ID..!");
                     scanner.next();
-                    findPatient();
+                    patientMenu();
                 }
                 patient = BookingHandlingSystem.getInstance().getPatients().stream().filter(p -> p.getId() == id).findFirst().orElse(null);
             }
@@ -91,7 +91,7 @@ public class PatientDashboard {
             }
             default -> {
                 System.out.println("Invalid choice. Try again..!");
-                findPatient();
+                patientMenu();
             }
         }
 
@@ -99,7 +99,7 @@ public class PatientDashboard {
             AppointmentHandling.manageAppointments(patient);
         } else {
             System.out.println("Patient profile not found..!");
-            findPatient();
+            patientMenu();
         }
     }
 }

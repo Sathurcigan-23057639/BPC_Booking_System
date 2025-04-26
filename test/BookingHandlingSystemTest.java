@@ -35,12 +35,6 @@ class BookingHandlingSystemTest {
         assertSame(bhs1, bhs2);
     }
 
-//    @Test
-//    void backToMainPage() {
-//        BookingHandlingSystem.backToMainPage();
-//        assertEquals("Returning to Main Menu...!", outContent.toString());
-//    }
-
     @Test
     void getPatients() {
         Patient patient = new Patient(1, "Abi", "UK", "7654456789");

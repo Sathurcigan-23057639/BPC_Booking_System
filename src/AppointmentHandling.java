@@ -154,7 +154,7 @@ public class AppointmentHandling {
 
     private static void rescheduleAppointment(Patient patient) {
         // Get all appointments for the specific patient
-        List<Appointment> patientAppointments = BookingHandlingSystem.getInstance().getAppointments().stream().filter(a -> a.getPatient().equals(patient)).toList();
+        List<Appointment> patientAppointments = BookingHandlingSystem.getInstance().getAppointments().stream().filter(a -> a.getPatient().equals(patient) && a.getStatus().equalsIgnoreCase("Booked")).toList();
 
         if (patientAppointments.isEmpty()) {
             System.out.println("\nNo appointments to reschedule.");

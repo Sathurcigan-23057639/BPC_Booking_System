@@ -103,7 +103,7 @@ public class PhysiotherapistDashboard {
         } else {
             System.out.println("Invalid input! Please enter a valid choice.");
             scanner.next();
-            findPhysiotherapist();
+            physiotherapistMenu();
         }
 
         switch (choice) {
@@ -128,7 +128,7 @@ public class PhysiotherapistDashboard {
             updatePhysioProfile(physio);
         } else {
             System.out.println("Physiotherapist not found..!");
-            findPhysiotherapist();
+            physiotherapistMenu();
         }
     }
 
@@ -145,12 +145,12 @@ public class PhysiotherapistDashboard {
                 updatePhysioProfile(physio);
             } else {
                 System.out.println("Physiotherapist not found.");
-                findPhysiotherapist();
+                physiotherapistMenu();
             }
         } else {
             System.out.println("Invalid input! Please enter a valid Physiotherapist ID..!");
             scanner.next();
-            searchPhysiotherapistById();
+            physiotherapistMenu();
         }
     }
 
@@ -181,7 +181,7 @@ public class PhysiotherapistDashboard {
             System.out.println("Availability updated successfully!");
         }
         else{
-            System.out.println("Try again..!");
+            System.out.println("Invalid input. Try again..!");
         }
         physiotherapistMenu();
     }

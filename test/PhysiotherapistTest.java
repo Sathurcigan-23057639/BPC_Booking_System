@@ -98,31 +98,6 @@ class PhysiotherapistTest {
         System.out.println("getAvailability() Function Testing\n-------------------------");
         assertEquals(expectedResult, actualResult);
     }
-//
-//    @Test
-//    void addAvailability() throws ParseException {
-//        Physiotherapist physio = getPhysiotherapist();
-//        physio.addAvailability("Tuesday", "07:00-09:00");
-//
-//        String availableSlots = physio.getAvailability().entrySet().stream().map(e -> e.getKey() + " " + e.getValue()).collect(Collectors.joining(","));
-//        String[] Slots = availableSlots.split(",");
-//        String[] individualSlot = Slots[0].split(" ");
-//        String day = individualSlot[0];
-//        String time = individualSlot[1];
-//
-//
-//        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-//        Date date = format.parse(day);
-//
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(date);
-//
-//        String expectedResult = "2025-05-20 07:00-09:00";
-//        int actualResult = cal.get(Calendar.DAY_OF_WEEK);
-//
-//        System.out.println(actualResult);
-////        assertEquals(expectedResult, actualResult);
-//    }
 
     @Test
     void testToString() {
