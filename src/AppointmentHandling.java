@@ -369,7 +369,7 @@ public class AppointmentHandling {
 
         List<Appointment> bookedAppointments = BookingHandlingSystem.getInstance().getAppointments();
 
-        List<Physiotherapist> availablePhysios = BookingHandlingSystem.getInstance().getPhysiotherapists().stream().filter(p -> p.getName().contains(requiredPhysio)).toList();
+        List<Physiotherapist> availablePhysios = BookingHandlingSystem.getInstance().getPhysiotherapists().stream().filter(p -> p.getName().equalsIgnoreCase(requiredPhysio)).toList();
 
         if (availablePhysios.isEmpty()) {
             System.out.println("No Physiotherapists found with this Name..!");

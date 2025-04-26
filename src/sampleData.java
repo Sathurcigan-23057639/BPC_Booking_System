@@ -21,7 +21,7 @@ public class sampleData {
         p3.addAvailability("Wednesday", "10:00-12:00");
         BookingHandlingSystem.getInstance().getPhysiotherapists().add(p3);
 
-        Physiotherapist p4 = new Physiotherapist(4, "varun", "UK", "98765678767", "Physiotherapy");
+        Physiotherapist p4 = new Physiotherapist(4, "Varun", "UK", "98765678767", "Physiotherapy");
         p4.addTreatment("Massage");
         p4.addAvailability("Monday", "12:00-14:00");
         p4.addAvailability("Wednesday", "09:00-11:00");

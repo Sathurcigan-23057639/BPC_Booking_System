@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1248</x>
+      <y>616</y>
+      <w>288</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>AppointmentHandling
+--
+- scanner : Scanner
+
+--
++ manageAppointments (patient : Patient) : void
+- handleAppointment(patient : Patient) : void
+- viewAppointments(patient : Patient) : void
+- processAppointment(patient : Patient) : void
+- attendAppointment(id : int, patient : Patient) : void
+- cancelAppointment(id : int, patient : Patient) : void
+- calculateMonth(month : String) : String
+- rescheduleAppointment(patient : Patient) : void
+- bookAppointment(patient : Patient) : void
+- searchByTreatment(patient : Patient) : void
+- searchByPhysio(patient : Patient) : void
+- searchByExpertise(patient : Patient) : void
+- convertDate(oldDate : String) : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>528</x>
+      <y>264</y>
+      <w>616</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>Appointment
+--
+- id : int
+- patient : Patient
+- physiotherapist : Physiotherapist
+- treatment : String
+- expertise : String
+- time : String
+- status : String
+
+--
++ Appointment(id : int, patient : Patient, physiotherapist : Physiotherapist, expertise : String, treatment : String, time : String)
++ getId() : int 
++ getPatient() : Patient 
++ getPhysiotherapist() : Physiotherapist 
++ getTreatment() : String 
++ getExpertise() : String 
++ getTime() : String 
++ setTime(time : String) : void 
++ getStatus() : String 
++ setStatus(String status) : void 
++ toString() : String &lt;&lt;Override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>632</y>
+      <w>288</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>BookingHandlingSystem
+--
+- scanner : Scanner
+- instance : BookingHandlingSystem
+- appointments : List&lt;Appointment&gt;
+- patients : List&lt;Patient&gt; 
+- physiotherapists : List&lt;Physiotherapist&gt;  
+
+--
+- BookingHandlingSystem()
++ getInstance() : BookingHandlingSystem
++ main(args : String[]) : void 
+- MainPage() : void 
+- close() : void 
++ backToMainPage() : void 
++ getPatients() : List&lt;Patient&gt; 
++ getPhysiotherapists() : List&lt;Physiotherapist&gt; 
++ getAppointments() : List&lt;Appointment&gt; </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>112</x>
+      <y>640</y>
+      <w>456</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>Physiotherapist
+--
+- id : int
+- expertise : String
+- treatments : List&lt;String&gt;
+- availability : Map&lt;String, String&gt;
+
+--
++ Physiotherapist(id : int, name : String, address : String, phone : String, expertise : String)
++ getNextWeekday(startDate : LocalDate, targetDay : DayOfWeek) : LocalDate
++ getId() : int
++ getExpertise() : String
++ getTreatments() : List&lt;String&gt; 
++ addTreatment(treatment : String) : void
++ getAvailability() : Map&lt;String, String&gt;
++ addAvailability(day : String, timeSlot : String) : void 
++ getDayOfWeekFromString(dayOfWeek : String) : DayOfWeek 
++ toString() : String &lt;&lt;Override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>0</y>
+      <w>328</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;super class&gt;&gt;
+User
+--
+- name : String 
+- address : String 
+- phone : String 
+
+--
++ User(id : int, name : String, address : String, phone : String)
++ getName() : String
++ getAddress() : String
++ setAddress() : void
++ getPhone() : String
++ setPhone(phone : String) : void
++ isValidNumber(number : String) : boolean
++ toString() : String &lt;&lt;Override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1224</x>
+      <y>256</y>
+      <w>328</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Patient
+--
+- id : int
+
+--
++ Patient(id : int, name : String, address : String, phone : String)
++ getId() : int
++ toString() : String &lt;&lt;Override&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>328</x>
+      <y>192</y>
+      <w>528</w>
+      <h>464</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>640.0;10.0;640.0;50.0;10.0;50.0;10.0;560.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>832</x>
+      <y>192</y>
+      <w>576</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0;700.0;50.0;700.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1304</x>
+      <y>416</y>
+      <w>168</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>PatientDashboard
+--
+- scanner : Scanner
+
+--
++ patientMenu() : void
+- createPatient() : void
+# findPatient() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>344</y>
+      <w>272</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>PhysiotherapistDashboard
+--
+- scanner : Scanner
+
+--
++ physiotherapistMenu() : void
+- createPhysiotherapist() : void
+- findPhysiotherapist() : void
+- searchPhysiotherapistByName() : void
+- searchPhysiotherapistById() : void
+- updatePhysioProfile(physio : Physiotherapist) : void
+- generateReport() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>424</x>
+      <y>312</y>
+      <w>176</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0;10.0;370.0;200.0;370.0;200.0;530.0;180.0;530.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>504</x>
+      <y>392</y>
+      <w>216</w>
+      <h>304</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>250.0;360.0;180.0;360.0;180.0;210.0;10.0;210.0;10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1464</x>
+      <y>488</y>
+      <w>120</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>90.0;230.0;120.0;230.0;120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1192</x>
+      <y>304</y>
+      <w>128</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>140.0;240.0;10.0;240.0;10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>392</y>
+      <w>128</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..1</panel_attributes>
+    <additional_attributes>50.0;10.0;20.0;10.0;20.0;430.0;140.0;430.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>984</x>
+      <y>304</y>
+      <w>256</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;490.0;230.0;490.0;230.0;10.0;300.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>704</y>
+      <w>160</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>180.0;10.0;130.0;10.0;130.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1056</x>
+      <y>760</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>sampleData
+--
+
+--
++ initializeData() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1096</x>
+      <y>728</y>
+      <w>96</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Data intialize&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>984</x>
+      <y>768</y>
+      <w>88</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>90.0;40.0;50.0;40.0;50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
